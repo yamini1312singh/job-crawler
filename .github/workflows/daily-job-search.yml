@@ -1,0 +1,13 @@
+name: Daily Job Search
+
+on:
+  schedule:
+    - cron: '30 4 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello
+        run: echo "Job search running"
