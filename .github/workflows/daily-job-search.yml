@@ -7,9 +7,16 @@ on:
     - cron: '30 4 * * *'
 
 jobs:
-  test:
+  search:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say Hello
-        run: echo "Job search running"
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Script
+        run: python scripts/fetch_jobs.py
