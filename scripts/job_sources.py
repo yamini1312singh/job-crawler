@@ -18,9 +18,11 @@ def get_sample_jobs():
 
             response = requests.get(url, timeout=15)
 
-           if response.status_code != 200:
-    print(f"{company} failed: {response.status_code}")
-    continue
+            if response.status_code != 200:
+                print(f"{company} failed: {response.status_code}")
+                continue
+
+            data = response.json()
 
             print(f"{company}: {len(data['jobs'])} jobs found")
 
