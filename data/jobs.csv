@@ -1,1 +1,137 @@
 date,company,role,location,link,source
+2026-07-14,Adobe,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Google,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Microsoft,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Amazon,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Netflix,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Prime Video,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,JioStar,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,SonyLIV,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,ZEE5,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,MX Player,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,aha,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Sun NXT,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Pocket FM,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Kuku FM,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Stage,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Chaupal,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Spotify,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,JioSaavn,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Wynk,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Airtel,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Tata Play,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Jio,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,boAt,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Noise,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Flipkart,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Myntra,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Meesho,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Swiggy,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Zomato,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Blinkit,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Zepto,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,BigBasket,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Rapido,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,PhonePe,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Paytm,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,CRED,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Groww,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Razorpay,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Pine Labs,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,BharatPe,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Uber,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Ola,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Ola Electric,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Dream11,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,ShareChat,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Moj,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Dailyhunt,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,InMobi,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Public App,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Nykaa,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Lenskart,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Mamaearth,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,The Derma Co,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,SUGAR Cosmetics,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Plum,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Minimalist,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Pilgrim,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Foxtale,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,mCaffeine,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,WOW Skin Science,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Renee,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,The Whole Truth,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Country Delight,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Licious,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,FreshToHome,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Blue Tokai,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Sleepy Owl,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Paper Boat,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Wingreens,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Bira91,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Wakefit,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,The Sleep Company,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,HealthKart,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Kapiva,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,OZiva,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Traya,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Mosaic Wellness,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,The Souled Store,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Bewakoof,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Snitch,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Newme,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,XYXX,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Neeman's,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Zouk,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Urban Company,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,MakeMyTrip,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Goibibo,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Ixigo,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,EaseMyTrip,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Shiprocket,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Delhivery,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Porter,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,HUL,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,P&G,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Nestle,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Marico,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Dabur,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Britannia,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Mondelez,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,PepsiCo,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Coca-Cola,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,ITC,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Reckitt,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Godrej Consumer,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Tata Consumer Products,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Sarvam AI,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Krutrim,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Gupshup,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Yellow.ai,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Uniphore,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Navi,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,PolicyBazaar,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,ACKO,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Ditto,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,UpGrad,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,PhysicsWallah,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Unacademy,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Apna,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Naukri,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Info Edge,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Cashfree,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Juspay,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,PhonePe Indus Appstore,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Dream Sports,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Games24x7,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Pocket Aces,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Dice Media,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,TVF,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,BrowserStack,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Postman,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Atlan,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Wingify,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,Whatfix,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,MoEngage,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,CleverTap,TEST_ROLE,Gurgaon,https://example.com,TEST
+2026-07-14,WebEngage,TEST_ROLE,Gurgaon,https://example.com,TEST
