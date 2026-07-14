@@ -1,16 +1,29 @@
+import pandas as pd
 from datetime import datetime
 
-print("Reading company list...")
+jobs = []
 
-with open("config/companies.txt", "r") as f:
-    companies = [line.strip() for line in f if line.strip()]
+sample_jobs = [
+    {
+        "date": str(datetime.now().date()),
+        "company": "Razorpay",
+        "role": "Product Manager",
+        "location": "Bangalore",
+        "link": "https://razorpay.com/careers/",
+        "source": "CAREERS"
+    },
+    {
+        "date": str(datetime.now().date()),
+        "company": "Postman",
+        "role": "Senior Product Manager",
+        "location": "Remote",
+        "link": "https://www.postman.com/company/careers/",
+        "source": "CAREERS"
+    }
+]
 
-print(f"Found {len(companies)} companies")
+df = pd.DataFrame(sample_jobs)
 
-with open("data/jobs.csv", "a") as f:
-    for company in companies:
-        f.write(
-            f"{datetime.now().date()},{company},TEST_ROLE,Gurgaon,https://example.com,TEST\n"
-        )
+df.to_csv("data/jobs.csv", index=False)
 
-print("Jobs written successfully")
+print(f"Saved {len(df)} jobs")
