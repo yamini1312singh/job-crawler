@@ -1,28 +1,13 @@
 import pandas as pd
 from datetime import datetime
+from job_sources import get_sample_jobs
 
-jobs = []
+jobs = get_sample_jobs()
 
-sample_jobs = [
-    {
-        "date": str(datetime.now().date()),
-        "company": "Razorpay",
-        "role": "Product Manager",
-        "location": "Bangalore",
-        "link": "https://razorpay.com/careers/",
-        "source": "CAREERS"
-    },
-    {
-        "date": str(datetime.now().date()),
-        "company": "Postman",
-        "role": "Senior Product Manager",
-        "location": "Remote",
-        "link": "https://www.postman.com/company/careers/",
-        "source": "CAREERS"
-    }
-]
+for job in jobs:
+    job["date"] = str(datetime.now().date())
 
-df = pd.DataFrame(sample_jobs)
+df = pd.DataFrame(jobs)
 
 df.to_csv("data/jobs.csv", index=False)
 
