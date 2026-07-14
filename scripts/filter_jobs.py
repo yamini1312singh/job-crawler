@@ -1,12 +1,18 @@
 TARGET_ROLES = [
-    "product",
-    "brand",
-    "strategy",
+    "product manager",
+    "associate product manager",
+    "senior product manager",
+    "group product manager",
+    "lead product manager",
+    "growth product manager",
+    "product marketing manager",
+    "brand manager",
+    "senior brand manager",
+    "strategy manager",
     "consultant",
-    "growth",
-    "product marketing",
-    "program manager",
-    "innovation"
+    "senior consultant",
+    "business consultant",
+    "program manager"
 ]
 
 TARGET_LOCATIONS = [
@@ -26,13 +32,13 @@ def keep_job(job):
     location = job["location"].lower()
 
     role_match = any(
-        keyword in role
-        for keyword in TARGET_ROLES
+        target in role
+        for target in TARGET_ROLES
     )
 
     location_match = any(
-        keyword in location
-        for keyword in TARGET_LOCATIONS
+        target in location
+        for target in TARGET_LOCATIONS
     )
 
     return role_match and location_match
