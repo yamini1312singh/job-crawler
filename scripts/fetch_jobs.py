@@ -22,6 +22,15 @@ df.to_csv("data/jobs.csv", index=False)
 print(f"Downloaded {len(all_jobs)} jobs")
 print(f"Filtered to {len(jobs)} jobs")
 
+print("\nMATCHING JOBS:\n")
+
+for job in jobs:
+    print(
+        f"{job['company']} | "
+        f"{job['role']} | "
+        f"{job['location']}"
+    )
+
 df.to_csv("data/jobs.csv", index=False)
 
 print("CSV updated successfully")
