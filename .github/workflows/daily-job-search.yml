@@ -2,9 +2,11 @@ name: Daily Job Search
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: '30 4 * * *'
+
+permissions:
+  contents: write
 
 jobs:
   search:
@@ -23,7 +25,8 @@ jobs:
 
       - name: Run Script
         run: python scripts/fetch_jobs.py
-              - name: Commit updated files
+
+      - name: Commit updated files
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
