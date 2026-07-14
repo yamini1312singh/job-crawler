@@ -1,27 +1,39 @@
 import requests
 
+GREENHOUSE_COMPANIES = [
+    "postman",
+    "browserstack",
+    "atlan"
+]
+
 def get_sample_jobs():
 
     jobs = []
 
-    try:
-        url = "https://boards-api.greenhouse.io/v1/boards/postman/jobs"
+    for company in GREENHOUSE_COMPANIES:
 
-        response = requests.get(url)
+        try:
 
-        data = response.json()
+            url = f"https://boards-api.greenhouse.io/v1/boards/{company}/jobs"
 
-        for job in data["jobs"]:
+            response = requests.get(url, timeout=15)
 
-            jobs.append({
-                "company": "Postman",
-                "role": job["title"],
-                "location": job["location"]["name"],
-                "link": job["absolute_url"],
-                "source": "GREENHOUSE"
-            })
+            if response.status_code != 200:
+                continue
 
-    except Exception as e:
-        print(e)
+            data = response.json()
+
+            for job in data["jobs"]:
+
+                jobs.append({
+                    "company": company.title(),
+                    "role": job["title"],
+                    "location": job["location"]["name"],
+                    "link": job["absolute_url"],
+                    "source": "GREENHOUSE"
+                })
+
+        except Exception as e:
+            print(f"Error with {company}: {e}")
 
     return jobs
