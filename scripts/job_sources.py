@@ -2,8 +2,10 @@ import requests
 
 GREENHOUSE_COMPANIES = [
     "postman",
-    "browserstack",
-    "atlan"
+    "whatfix",
+    "webengage",
+    "gocomet",
+    "sprinklr"
 ]
 
 def get_sample_jobs():
