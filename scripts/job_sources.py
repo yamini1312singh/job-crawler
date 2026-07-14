@@ -1,5 +1,4 @@
 import requests
-
 from indeed_jobs import get_indeed_jobs
 
 # -------------------------
@@ -10,12 +9,13 @@ def get_greenhouse_jobs():
 
     jobs = []
 
-   with open("config/greenhouse_companies.txt") as f:
-    companies = [
-        line.strip()
-        for line in f
-        if line.strip()
-    ]
+    with open("config/greenhouse_companies.txt") as f:
+
+        companies = [
+            line.strip()
+            for line in f
+            if line.strip()
+        ]
 
     for company in companies:
 
@@ -26,10 +26,12 @@ def get_greenhouse_jobs():
             response = requests.get(url, timeout=15)
 
             if response.status_code != 200:
+
                 print(
                     f"FAILED -> {company} -> "
                     f"Status Code: {response.status_code}"
                 )
+
                 continue
 
             data = response.json()
@@ -122,17 +124,11 @@ def get_sample_jobs():
     jobs = []
 
     jobs.extend(get_greenhouse_jobs())
-
     jobs.extend(get_lever_jobs())
-
     jobs.extend(get_indeed_jobs())
-
     jobs.extend(get_linkedin_jobs())
-
     jobs.extend(get_naukri_jobs())
-
     jobs.extend(get_instahyre_jobs())
-
     jobs.extend(get_iimjobs_jobs())
 
     print(f"TOTAL JOBS COLLECTED: {len(jobs)}")
