@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from scripts.job_sources import get_sample_jobs
+from job_sources import get_sample_jobs
 
 jobs = get_sample_jobs()
 
