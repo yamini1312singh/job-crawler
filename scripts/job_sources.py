@@ -1,24 +1,24 @@
 import requests
 
-GREENHOUSE_COMPANIES = [
-    "postman",
-    "whatfix",
-    "webengage",
-    "gocomet",
-    "sprinklr"
-]
+from indeed_jobs import get_indeed_jobs
 
-def get_sample_jobs():
+# -------------------------
+# GREENHOUSE
+# -------------------------
+
+def get_greenhouse_jobs():
 
     jobs = []
 
-    for company in GREENHOUSE_COMPANIES:
+    companies = [
+        "postman"
+    ]
+
+    for company in companies:
 
         try:
 
             url = f"https://boards-api.greenhouse.io/v1/boards/{company}/jobs"
-
-            print(f"Checking: {url}")
 
             response = requests.get(url, timeout=15)
 
@@ -51,5 +51,87 @@ def get_sample_jobs():
             print(
                 f"ERROR -> {company} -> {e}"
             )
+
+    return jobs
+
+
+# -------------------------
+# LEVER (placeholder)
+# -------------------------
+
+def get_lever_jobs():
+
+    jobs = []
+
+    return jobs
+
+
+# -------------------------
+# LINKEDIN (placeholder)
+# -------------------------
+
+def get_linkedin_jobs():
+
+    jobs = []
+
+    return jobs
+
+
+# -------------------------
+# NAUKRI (placeholder)
+# -------------------------
+
+def get_naukri_jobs():
+
+    jobs = []
+
+    return jobs
+
+
+# -------------------------
+# INSTAHYRE (placeholder)
+# -------------------------
+
+def get_instahyre_jobs():
+
+    jobs = []
+
+    return jobs
+
+
+# -------------------------
+# IIMJOBS (placeholder)
+# -------------------------
+
+def get_iimjobs_jobs():
+
+    jobs = []
+
+    return jobs
+
+
+# -------------------------
+# MASTER FUNCTION
+# -------------------------
+
+def get_sample_jobs():
+
+    jobs = []
+
+    jobs.extend(get_greenhouse_jobs())
+
+    jobs.extend(get_lever_jobs())
+
+    jobs.extend(get_indeed_jobs())
+
+    jobs.extend(get_linkedin_jobs())
+
+    jobs.extend(get_naukri_jobs())
+
+    jobs.extend(get_instahyre_jobs())
+
+    jobs.extend(get_iimjobs_jobs())
+
+    print(f"TOTAL JOBS COLLECTED: {len(jobs)}")
 
     return jobs
