@@ -16,4 +16,6 @@ def get_indeed_jobs():
 
         print(f"Searching Indeed for: {term}")
 
+    print("Indeed collection not implemented yet")
+
     return jobs
