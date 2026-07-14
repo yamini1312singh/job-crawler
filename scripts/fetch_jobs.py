@@ -15,7 +15,19 @@ jobs = [
 for job in jobs:
     job["date"] = str(datetime.now().date())
 
-df = pd.DataFrame(jobs)
+if jobs:
+    df = pd.DataFrame(jobs)
+else:
+    df = pd.DataFrame(
+        columns=[
+            "company",
+            "role",
+            "location",
+            "link",
+            "source",
+            "date"
+        ]
+    )
 
 df.to_csv("data/jobs.csv", index=False)
 
