@@ -2,12 +2,13 @@ def get_indeed_jobs():
 
     jobs = []
 
-    search_terms = [
-        "product manager",
-        "brand manager",
-        "strategy manager",
-        "consultant"
-    ]
+    with open("config/search_terms.txt") as f:
+
+        search_terms = [
+            line.strip()
+            for line in f
+            if line.strip()
+        ]
 
     print("Indeed source loaded")
 
