@@ -18,15 +18,23 @@ def get_sample_jobs():
 
             url = f"https://boards-api.greenhouse.io/v1/boards/{company}/jobs"
 
+            print(f"Checking: {url}")
+
             response = requests.get(url, timeout=15)
 
             if response.status_code != 200:
-                print(f"{company} failed: {response.status_code}")
+                print(
+                    f"FAILED -> {company} -> "
+                    f"Status Code: {response.status_code}"
+                )
                 continue
 
             data = response.json()
 
-            print(f"{company}: {len(data['jobs'])} jobs found")
+            print(
+                f"SUCCESS -> {company} -> "
+                f"{len(data['jobs'])} jobs found"
+            )
 
             for job in data["jobs"]:
 
@@ -39,6 +47,9 @@ def get_sample_jobs():
                 })
 
         except Exception as e:
-            print(f"Error with {company}: {e}")
+
+            print(
+                f"ERROR -> {company} -> {e}"
+            )
 
     return jobs
