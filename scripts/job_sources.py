@@ -10,8 +10,11 @@ def get_greenhouse_jobs():
 
     jobs = []
 
+   with open("config/greenhouse_companies.txt") as f:
     companies = [
-        "postman"
+        line.strip()
+        for line in f
+        if line.strip()
     ]
 
     for company in companies:
