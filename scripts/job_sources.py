@@ -1,5 +1,7 @@
 import requests
+
 from indeed_jobs import get_indeed_jobs
+from linkedin_jobs import get_linkedin_jobs
 
 # -------------------------
 # GREENHOUSE
@@ -72,14 +74,21 @@ def get_lever_jobs():
 
 
 # -------------------------
-# LINKEDIN (placeholder)
+# INDEED
 # -------------------------
 
-def get_linkedin_jobs():
+def get_indeed_jobs_wrapper():
 
-    jobs = []
+    return get_indeed_jobs()
 
-    return jobs
+
+# -------------------------
+# LINKEDIN
+# -------------------------
+
+def get_linkedin_jobs_wrapper():
+
+    return get_linkedin_jobs()
 
 
 # -------------------------
@@ -125,8 +134,8 @@ def get_sample_jobs():
 
     jobs.extend(get_greenhouse_jobs())
     jobs.extend(get_lever_jobs())
-    jobs.extend(get_indeed_jobs())
-    jobs.extend(get_linkedin_jobs())
+    jobs.extend(get_indeed_jobs_wrapper())
+    jobs.extend(get_linkedin_jobs_wrapper())
     jobs.extend(get_naukri_jobs())
     jobs.extend(get_instahyre_jobs())
     jobs.extend(get_iimjobs_jobs())
