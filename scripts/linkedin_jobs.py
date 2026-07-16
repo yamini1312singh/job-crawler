@@ -1,4 +1,5 @@
 import requests
+from bs4 import BeautifulSoup
 
 
 def get_linkedin_jobs():
@@ -31,9 +32,18 @@ def get_linkedin_jobs():
             f"{response.status_code}"
         )
 
+        soup = BeautifulSoup(
+            response.text,
+            "lxml"
+        )
+
+        cards = soup.find_all(
+            "li"
+        )
+
         print(
-            f"LinkedIn response length: "
-            f"{len(response.text)}"
+            f"LinkedIn cards found: "
+            f"{len(cards)}"
         )
 
     except Exception as e:
