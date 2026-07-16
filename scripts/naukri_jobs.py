@@ -28,17 +28,26 @@ def get_naukri_jobs():
             f"{len(response.text)}"
         )
 
-        print(
-            "\n----- NAUKRI HTML START -----\n"
-        )
+        html = response.text
 
-        print(
-            response.text[:2000]
-        )
+        keywords = [
+            "jobTuple",
+            "title",
+            "company",
+            "jobDetails",
+            "list-header"
+        ]
 
-        print(
-            "\n----- NAUKRI HTML END -----\n"
-        )
+        print("\n----- NAUKRI CHECK -----\n")
+
+        for keyword in keywords:
+
+            print(
+                f"{keyword}: "
+                f"{keyword in html}"
+            )
+
+        print("\n----- END CHECK -----\n")
 
     except Exception as e:
 
