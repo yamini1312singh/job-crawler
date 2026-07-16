@@ -2,6 +2,7 @@ import requests
 
 from indeed_jobs import get_indeed_jobs
 from linkedin_jobs import get_linkedin_jobs
+from naukri_jobs import get_naukri_jobs
 
 # -------------------------
 # GREENHOUSE
