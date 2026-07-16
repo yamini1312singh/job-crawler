@@ -18,12 +18,11 @@ TARGET_ROLES = [
 TARGET_LOCATIONS = [
     "gurgaon",
     "gurugram",
+    "new delhi",
     "delhi",
     "noida",
     "mumbai",
-    "remote",
-    "worldwide",
-    "india"
+    "remote"
 ]
 
 def keep_job(job):
