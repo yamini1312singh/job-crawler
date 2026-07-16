@@ -8,7 +8,7 @@ def get_naukri_jobs():
     try:
 
         response = requests.get(
-            "https://www.naukri.com",
+            "https://www.naukri.com/product-manager-jobs",
             headers={
                 "User-Agent": (
                     "Mozilla/5.0 "
