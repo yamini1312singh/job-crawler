@@ -1,31 +1,45 @@
+import requests
+
+
 def get_linkedin_jobs():
 
     jobs = []
 
-    with open("config/linkedin_search_terms.txt") as f:
-
-        search_terms = [
-            line.strip()
-            for line in f
-            if line.strip()
-        ]
-
-    with open("config/linkedin_locations.txt") as f:
-
-        locations = [
-            line.strip()
-            for line in f
-            if line.strip()
-        ]
-
     print("LinkedIn source loaded")
 
-    print(
-        f"Loaded {len(search_terms)} search terms"
-    )
+    try:
 
-    print(
-        f"Loaded {len(locations)} locations"
-    )
+        url = (
+            "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
+            "?keywords=Product%20Manager"
+            "&location=India"
+        )
+
+        response = requests.get(
+            url,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 "
+                    "(Windows NT 10.0; Win64; x64)"
+                )
+            },
+            timeout=20
+        )
+
+        print(
+            f"LinkedIn status code: "
+            f"{response.status_code}"
+        )
+
+        print(
+            f"LinkedIn response length: "
+            f"{len(response.text)}"
+        )
+
+    except Exception as e:
+
+        print(
+            f"LinkedIn error: {e}"
+        )
 
     return jobs
