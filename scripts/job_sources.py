@@ -1,8 +1,10 @@
 import requests
 
-from indeed_jobs import get_indeed_jobs
 from linkedin_jobs import get_linkedin_jobs
 from naukri_jobs import get_naukri_jobs
+
+# from indeed_jobs import get_indeed_jobs
+
 
 # -------------------------
 # GREENHOUSE
@@ -24,9 +26,15 @@ def get_greenhouse_jobs():
 
         try:
 
-            url = f"https://boards-api.greenhouse.io/v1/boards/{company}/jobs"
+            url = (
+                f"https://boards-api.greenhouse.io/"
+                f"v1/boards/{company}/jobs"
+            )
 
-            response = requests.get(url, timeout=15)
+            response = requests.get(
+                url,
+                timeout=15
+            )
 
             if response.status_code != 200:
 
@@ -64,68 +72,6 @@ def get_greenhouse_jobs():
 
 
 # -------------------------
-# LEVER (placeholder)
-# -------------------------
-
-def get_lever_jobs():
-
-    jobs = []
-
-    return jobs
-
-
-# -------------------------
-# INDEED
-# -------------------------
-
-def get_indeed_jobs_wrapper():
-
-    return get_indeed_jobs()
-
-
-# -------------------------
-# LINKEDIN
-# -------------------------
-
-def get_linkedin_jobs_wrapper():
-
-    return get_linkedin_jobs()
-
-
-# -------------------------
-# NAUKRI (placeholder)
-# -------------------------
-
-def get_naukri_jobs():
-
-    jobs = []
-
-    return jobs
-
-
-# -------------------------
-# INSTAHYRE (placeholder)
-# -------------------------
-
-def get_instahyre_jobs():
-
-    jobs = []
-
-    return jobs
-
-
-# -------------------------
-# IIMJOBS (placeholder)
-# -------------------------
-
-def get_iimjobs_jobs():
-
-    jobs = []
-
-    return jobs
-
-
-# -------------------------
 # MASTER FUNCTION
 # -------------------------
 
@@ -134,13 +80,16 @@ def get_sample_jobs():
     jobs = []
 
     jobs.extend(get_greenhouse_jobs())
-    jobs.extend(get_lever_jobs())
-    jobs.extend(get_indeed_jobs_wrapper())
-    jobs.extend(get_linkedin_jobs_wrapper())
-    jobs.extend(get_naukri_jobs())
-    jobs.extend(get_instahyre_jobs())
-    jobs.extend(get_iimjobs_jobs())
 
-    print(f"TOTAL JOBS COLLECTED: {len(jobs)}")
+    # Temporarily disabled
+    # jobs.extend(get_indeed_jobs())
+
+    jobs.extend(get_linkedin_jobs())
+
+    jobs.extend(get_naukri_jobs())
+
+    print(
+        f"TOTAL JOBS COLLECTED: {len(jobs)}"
+    )
 
     return jobs
