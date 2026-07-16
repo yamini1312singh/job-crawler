@@ -3,19 +3,21 @@ from datetime import datetime
 
 from job_sources import get_sample_jobs
 from filter_jobs import keep_job
+from send_email import send_email
+
 
 # -------------------------
 # COLLECT ALL JOBS
 # -------------------------
-
 all_jobs = get_sample_jobs()
 
-print(f"Downloaded {len(all_jobs)} jobs")
+print(
+    f"Downloaded {len(all_jobs)} jobs"
+)
 
 # -------------------------
 # SAVE RAW JOBS
 # -------------------------
-
 raw_df = pd.DataFrame(all_jobs)
 
 raw_df.to_csv(
@@ -30,7 +32,6 @@ print(
 # -------------------------
 # APPLY FILTERS
 # -------------------------
-
 jobs = [
     job
     for job in all_jobs
@@ -40,8 +41,8 @@ jobs = [
 # -------------------------
 # REMOVE DUPLICATES
 # -------------------------
-
 seen = set()
+
 unique_jobs = []
 
 for job in jobs:
@@ -53,9 +54,7 @@ for job in jobs:
     )
 
     if key not in seen:
-
         seen.add(key)
-
         unique_jobs.append(job)
 
 jobs = unique_jobs
@@ -63,7 +62,6 @@ jobs = unique_jobs
 # -------------------------
 # ADD DATE
 # -------------------------
-
 for job in jobs:
 
     job["date"] = str(
@@ -73,7 +71,6 @@ for job in jobs:
 # -------------------------
 # SAVE FILTERED JOBS
 # -------------------------
-
 if jobs:
 
     df = pd.DataFrame(jobs)
@@ -99,7 +96,6 @@ df.to_csv(
 # -------------------------
 # LOGS
 # -------------------------
-
 print(
     f"Filtered to {len(jobs)} jobs"
 )
@@ -117,3 +113,41 @@ for job in jobs:
 print(
     "CSV updated successfully"
 )
+
+# -------------------------
+# EMAIL RESULTS
+# -------------------------
+if jobs:
+
+    email_body = (
+        f"Found {len(jobs)} matching jobs\n\n"
+    )
+
+    for job in jobs:
+
+        email_body += (
+            f"{job['company']} | "
+            f"{job['role']} | "
+            f"{job['location']}\n"
+            f"{job['link']}\n\n"
+        )
+
+    send_email(
+        subject=f"{len(jobs)} New Job Matches",
+        body=email_body
+    )
+
+    print(
+        "Email sent successfully"
+    )
+
+else:
+
+    send_email(
+        subject="No New Job Matches",
+        body="No matching jobs found today."
+    )
+
+    print(
+        "No jobs found email sent"
+    )
