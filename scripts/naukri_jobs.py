@@ -29,6 +29,21 @@ def get_naukri_jobs():
         )
 
         html = response.text
+        checks = [
+    "__NEXT_DATA__",
+    "__INITIAL_STATE__",
+    "jobDetails",
+    '"jobId"',
+    '"companyName"',
+    '"title"',
+    '"jdURL"',
+    '"company"',
+]
+
+print("----- NAUKRI CHECK -----")
+for c in checks:
+    print(f"{c}: {c in html}")
+print("----- END CHECK -----")
 
         keywords = [
             "__NEXT_DATA__",
