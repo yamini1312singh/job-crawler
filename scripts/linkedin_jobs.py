@@ -6,65 +6,83 @@ def get_linkedin_jobs():
 
     jobs = []
 
+    with open("config/linkedin_search_terms.txt") as f:
+        search_terms = [
+            line.strip()
+            for line in f
+            if line.strip()
+        ]
+
     print("LinkedIn source loaded")
 
-    try:
+    for term in search_terms:
 
-        url = (
-            "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
-            "?keywords=Product%20Manager"
-            "&location=India"
-        )
+        try:
 
-        response = requests.get(
-            url,
-            headers={
-                "User-Agent": (
-                    "Mozilla/5.0 "
-                    "(Windows NT 10.0; Win64; x64)"
-                )
-            },
-            timeout=20
-        )
+            keyword = term.replace(" ", "%20")
 
-        print(f"LinkedIn status code: {response.status_code}")
+            url = (
+                "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
+                f"?keywords={keyword}"
+                "&location=India"
+            )
 
-        soup = BeautifulSoup(
-            response.text,
-            "lxml"
-        )
+            response = requests.get(
+                url,
+                headers={
+                    "User-Agent": (
+                        "Mozilla/5.0 "
+                        "(Windows NT 10.0; Win64; x64)"
+                    )
+                },
+                timeout=20
+            )
 
-        cards = soup.find_all("li")
+            soup = BeautifulSoup(
+                response.text,
+                "lxml"
+            )
 
-        print(f"LinkedIn cards found: {len(cards)}")
+            cards = soup.find_all("li")
 
-        for card in cards:
+            print(
+                f"{term}: {len(cards)} cards found"
+            )
 
-            try:
+            for card in cards:
 
-                title = card.find("h3")
-                company = card.find("h4")
-                location = card.find("span", class_="job-search-card__location")
-                link = card.find("a")
+                try:
 
-                if not title:
+                    title = card.find("h3")
+                    company = card.find("h4")
+                    location = card.find(
+                        "span",
+                        class_="job-search-card__location"
+                    )
+                    link = card.find("a")
+
+                    if not title:
+                        continue
+
+                    jobs.append({
+                        "company": company.get_text(strip=True) if company else "Unknown",
+                        "role": title.get_text(strip=True),
+                        "location": location.get_text(strip=True) if location else "Unknown",
+                        "link": link["href"] if link else "",
+                        "source": "LINKEDIN"
+                    })
+
+                except Exception:
                     continue
 
-                jobs.append({
-                    "company": company.get_text(strip=True) if company else "Unknown",
-                    "role": title.get_text(strip=True),
-                    "location": location.get_text(strip=True) if location else "Unknown",
-                    "link": link["href"] if link else "",
-                    "source": "LINKEDIN"
-                })
+        except Exception as e:
 
-            except Exception:
-                continue
+            print(
+                f"LinkedIn error for {term}: {e}"
+            )
 
-        print(f"LinkedIn jobs extracted: {len(jobs)}")
-
-    except Exception as e:
-
-        print(f"LinkedIn error: {e}")
+    print(
+        f"LinkedIn jobs extracted: {len(jobs)}"
+    )
 
     return jobs
