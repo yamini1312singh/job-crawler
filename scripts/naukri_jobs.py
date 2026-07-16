@@ -1,6 +1,5 @@
-# scripts/naukri_jobs.py
-
 import requests
+
 
 def get_naukri_jobs():
 
@@ -27,6 +26,18 @@ def get_naukri_jobs():
         print(
             f"Naukri response length: "
             f"{len(response.text)}"
+        )
+
+        print(
+            "\n----- NAUKRI HTML START -----\n"
+        )
+
+        print(
+            response.text[:2000]
+        )
+
+        print(
+            "\n----- NAUKRI HTML END -----\n"
         )
 
     except Exception as e:
