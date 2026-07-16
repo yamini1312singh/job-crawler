@@ -5,7 +5,16 @@ from job_sources import get_sample_jobs
 from filter_jobs import keep_job
 
 all_jobs = get_sample_jobs()
+raw_df = pd.DataFrame(all_jobs)
 
+raw_df.to_csv(
+    "data/raw_jobs.csv",
+    index=False
+)
+
+print(
+    f"Saved {len(all_jobs)} raw jobs"
+)
 jobs = [
     job
     for job in all_jobs
