@@ -4,7 +4,32 @@ from datetime import datetime
 from job_sources import get_sample_jobs
 from filter_jobs import keep_job
 
+# -------------------------
+# COLLECT ALL JOBS
+# -------------------------
+
 all_jobs = get_sample_jobs()
+
+print(f"Downloaded {len(all_jobs)} jobs")
+
+# -------------------------
+# SAVE RAW JOBS
+# -------------------------
+
+raw_df = pd.DataFrame(all_jobs)
+
+raw_df.to_csv(
+    "data/raw_jobs.csv",
+    index=False
+)
+
+print(
+    f"Saved {len(all_jobs)} raw jobs"
+)
+
+# -------------------------
+# APPLY FILTERS
+# -------------------------
 
 jobs = [
     job
@@ -12,12 +37,49 @@ jobs = [
     if keep_job(job)
 ]
 
+# -------------------------
+# REMOVE DUPLICATES
+# -------------------------
+
+seen = set()
+unique_jobs = []
+
 for job in jobs:
-    job["date"] = str(datetime.now().date())
+
+    key = (
+        job["company"],
+        job["role"],
+        job["location"]
+    )
+
+    if key not in seen:
+
+        seen.add(key)
+
+        unique_jobs.append(job)
+
+jobs = unique_jobs
+
+# -------------------------
+# ADD DATE
+# -------------------------
+
+for job in jobs:
+
+    job["date"] = str(
+        datetime.now().date()
+    )
+
+# -------------------------
+# SAVE FILTERED JOBS
+# -------------------------
 
 if jobs:
+
     df = pd.DataFrame(jobs)
+
 else:
+
     df = pd.DataFrame(
         columns=[
             "company",
@@ -29,20 +91,29 @@ else:
         ]
     )
 
-df.to_csv("data/jobs.csv", index=False)
+df.to_csv(
+    "data/jobs.csv",
+    index=False
+)
 
-print(f"Downloaded {len(all_jobs)} jobs")
-print(f"Filtered to {len(jobs)} jobs")
+# -------------------------
+# LOGS
+# -------------------------
+
+print(
+    f"Filtered to {len(jobs)} jobs"
+)
 
 print("\nMATCHING JOBS:\n")
 
 for job in jobs:
+
     print(
         f"{job['company']} | "
         f"{job['role']} | "
         f"{job['location']}"
     )
 
-df.to_csv("data/jobs.csv", index=False)
-
-print("CSV updated successfully")
+print(
+    "CSV updated successfully"
+)
