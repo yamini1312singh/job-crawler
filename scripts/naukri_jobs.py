@@ -29,51 +29,24 @@ def get_naukri_jobs():
         )
 
         html = response.text
+
         checks = [
-    "__NEXT_DATA__",
-    "__INITIAL_STATE__",
-    "jobDetails",
-    '"jobId"',
-    '"companyName"',
-    '"title"',
-    '"jdURL"',
-    '"company"',
-]
-
-print("----- NAUKRI CHECK -----")
-for c in checks:
-    print(f"{c}: {c in html}")
-print("----- END CHECK -----")
-
-        keywords = [
             "__NEXT_DATA__",
+            "__INITIAL_STATE__",
             "jobDetails",
-            "searchResult",
-            "jobs",
-            "companyName",
-            "title"
+            '"jobId"',
+            '"companyName"',
+            '"title"',
+            '"jdURL"',
+            '"company"',
         ]
 
-        print("\n----- NAUKRI CHECK -----\n")
+        print("----- NAUKRI CHECK -----")
 
-        for keyword in keywords:
+        for c in checks:
+            print(f"{c}: {c in html}")
 
-            print(
-                f"{keyword}: "
-                f"{keyword in html}"
-            )
-
-        if "__NEXT_DATA__" in html:
-
-            idx = html.find("__NEXT_DATA__")
-
-            print("\n----- NEXT DATA SNIPPET -----\n")
-
-            print(
-                html[max(0, idx - 500): idx + 1500]
-            )
-
-            print("\n----- END SNIPPET -----\n")
+        print("----- END CHECK -----")
 
     except Exception as e:
 
