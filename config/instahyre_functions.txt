@@ -1,0 +1,10 @@
+# Instahyre job-function IDs to pull.
+# Format: "<id>  # <name>"  (only the leading number is read)
+11  # Product Management
+20  # Brand Management
+34  # General Management / Strategy
+81  # Management Consulting
+78  # Functional Consulting
+80  # Technical Consulting
+22  # Online Marketing
+86  # Market Research
