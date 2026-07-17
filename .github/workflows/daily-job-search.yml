@@ -35,6 +35,6 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add data/jobs.csv data/raw_jobs.csv
+          git add data/jobs.csv data/raw_jobs.csv data/seen_jobs.csv
           git diff --staged --quiet || git commit -m "Update jobs data"
           git push
