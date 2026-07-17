@@ -2,6 +2,7 @@ import requests
 
 from linkedin_jobs import get_linkedin_jobs
 from naukri_jobs import get_naukri_jobs
+from instahyre_jobs import get_instahyre_jobs
 
 # from indeed_jobs import get_indeed_jobs
 
@@ -86,7 +87,12 @@ def get_sample_jobs():
 
     jobs.extend(get_linkedin_jobs())
 
-    jobs.extend(get_naukri_jobs())
+    jobs.extend(get_instahyre_jobs())
+
+    # Blocked: Naukri gates its API behind reCAPTCHA for automated
+    # requests, so it returns 0 results from CI. Left in the repo but
+    # not called. See docs/status.md.
+    # jobs.extend(get_naukri_jobs())
 
     print(
         f"TOTAL JOBS COLLECTED: {len(jobs)}"
