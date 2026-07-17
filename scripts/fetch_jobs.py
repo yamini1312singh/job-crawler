@@ -1,9 +1,97 @@
 import pandas as pd
 from datetime import datetime
+from pathlib import Path
 
 from job_sources import get_sample_jobs
 from filter_jobs import keep_job
 from send_email import send_email
+
+
+DATA_DIR = Path("data")
+JOBS_FILE = DATA_DIR / "jobs.csv"
+SEEN_JOBS_FILE = DATA_DIR / "seen_jobs.csv"
+
+
+def normalise(value):
+    return " ".join(str(value or "").lower().split())
+
+
+def job_key(job):
+    # We use job details rather than the full link because tracking
+    # details in a link can change even when it is the same job.
+    return "|".join(
+        normalise(job.get(field))
+        for field in ("company", "role", "location")
+    )
+
+
+def history_from_dataframe(dataframe, today):
+    required_columns = {"company", "role", "location"}
+
+    if dataframe.empty or not required_columns.issubset(dataframe.columns):
+        return pd.DataFrame(
+            columns=[
+                "job_key",
+                "company",
+                "role",
+                "location",
+                "link",
+                "first_seen"
+            ]
+        )
+
+    history = dataframe.copy()
+
+    history["job_key"] = history.apply(
+        lambda row: job_key(row),
+        axis=1
+    )
+
+    if "link" not in history.columns:
+        history["link"] = ""
+
+    if "date" in history.columns:
+        history["first_seen"] = history["date"].fillna(today)
+    else:
+        history["first_seen"] = today
+
+    return history[
+        [
+            "job_key",
+            "company",
+            "role",
+            "location",
+            "link",
+            "first_seen"
+        ]
+    ].drop_duplicates(
+        subset="job_key",
+        keep="first"
+    )
+
+
+def load_seen_jobs(today):
+    if SEEN_JOBS_FILE.exists():
+        return pd.read_csv(SEEN_JOBS_FILE)
+
+    # On the first run, use the previous daily results as the starting
+    # history. Those jobs were already sent in today's successful test.
+    if JOBS_FILE.exists():
+        return history_from_dataframe(
+            pd.read_csv(JOBS_FILE),
+            today
+        )
+
+    return pd.DataFrame(
+        columns=[
+            "job_key",
+            "company",
+            "role",
+            "location",
+            "link",
+            "first_seen"
+        ]
+    )
 
 
 # -------------------------
@@ -11,73 +99,71 @@ from send_email import send_email
 # -------------------------
 all_jobs = get_sample_jobs()
 
-print(
-    f"Downloaded {len(all_jobs)} jobs"
-)
+print(f"Downloaded {len(all_jobs)} jobs")
 
 # -------------------------
 # SAVE RAW JOBS
 # -------------------------
-raw_df = pd.DataFrame(all_jobs)
+DATA_DIR.mkdir(exist_ok=True)
 
-raw_df.to_csv(
-    "data/raw_jobs.csv",
+pd.DataFrame(all_jobs).to_csv(
+    DATA_DIR / "raw_jobs.csv",
     index=False
 )
 
-print(
-    f"Saved {len(all_jobs)} raw jobs"
-)
+print(f"Saved {len(all_jobs)} raw jobs")
 
 # -------------------------
-# APPLY FILTERS
+# APPLY FILTERS AND REMOVE DUPLICATES
 # -------------------------
-jobs = [
+filtered_jobs = [
     job
     for job in all_jobs
     if keep_job(job)
 ]
 
-# -------------------------
-# REMOVE DUPLICATES
-# -------------------------
-seen = set()
+jobs = []
+current_keys = set()
 
-unique_jobs = []
+for job in filtered_jobs:
+    key = job_key(job)
 
+    if key and key not in current_keys:
+        current_keys.add(key)
+        jobs.append(job)
+
+# -------------------------
+# FIND JOBS NOT EMAILED BEFORE
+# -------------------------
+today = str(datetime.now().date())
+
+seen_df = load_seen_jobs(today)
+
+known_keys = set(
+    seen_df["job_key"]
+    .dropna()
+    .astype(str)
+)
+
+new_jobs = [
+    job
+    for job in jobs
+    if job_key(job) not in known_keys
+]
+
+# -------------------------
+# SAVE CURRENT RESULTS
+# -------------------------
 for job in jobs:
+    job["date"] = today
 
-    key = (
-        job["company"],
-        job["role"],
-        job["location"]
-    )
-
-    if key not in seen:
-        seen.add(key)
-        unique_jobs.append(job)
-
-jobs = unique_jobs
-
-# -------------------------
-# ADD DATE
-# -------------------------
-for job in jobs:
-
-    job["date"] = str(
-        datetime.now().date()
-    )
-
-# -------------------------
-# SAVE FILTERED JOBS
-# -------------------------
 if jobs:
-
-    df = pd.DataFrame(jobs)
-
+    pd.DataFrame(jobs).to_csv(
+        JOBS_FILE,
+        index=False
+    )
 else:
-
-    df = pd.DataFrame(
+    pd.DataFrame(
         columns=[
             "company",
             "role",
@@ -86,45 +172,60 @@ else:
             "source",
             "date"
         ]
+    ).to_csv(
+        JOBS_FILE,
+        index=False
     )
 
-df.to_csv(
-    "data/jobs.csv",
+# -------------------------
+# SAVE PERMANENT HISTORY
+# -------------------------
+new_history_rows = [
+    {
+        "job_key": job_key(job),
+        "company": job["company"],
+        "role": job["role"],
+        "location": job["location"],
+        "link": job["link"],
+        "first_seen": today
+    }
+    for job in new_jobs
+]
+
+if new_history_rows:
+    seen_df = pd.concat(
+        [
+            seen_df,
+            pd.DataFrame(new_history_rows)
+        ],
+        ignore_index=True
+    )
+
+seen_df = seen_df.drop_duplicates(
+    subset="job_key",
+    keep="first"
+)
+
+seen_df.to_csv(
+    SEEN_JOBS_FILE,
     index=False
 )
 
 # -------------------------
 # LOGS
 # -------------------------
-print(
-    f"Filtered to {len(jobs)} jobs"
-)
-
-print("\nMATCHING JOBS:\n")
-
-for job in jobs:
-
-    print(
-        f"{job['company']} | "
-        f"{job['role']} | "
-        f"{job['location']}"
-    )
-
-print(
-    "CSV updated successfully"
-)
+print(f"Filtered to {len(jobs)} unique jobs")
+print(f"Found {len(new_jobs)} jobs not emailed before")
 
 # -------------------------
-# EMAIL RESULTS
+# EMAIL ONLY NEW JOBS
 # -------------------------
-if jobs:
-
+if new_jobs:
     email_body = (
-        f"Found {len(jobs)} matching jobs\n\n"
+        f"Found {len(new_jobs)} new job matches\n\n"
     )
 
-    for job in jobs:
-
+    for job in new_jobs:
         email_body += (
             f"{job['company']} | "
             f"{job['role']} | "
@@ -133,21 +234,10 @@ if jobs:
         )
 
     send_email(
-        subject=f"{len(jobs)} New Job Matches",
+        subject=f"{len(new_jobs)} New Job Matches",
         body=email_body
     )
 
-    print(
-        "Email sent successfully"
-    )
-
+    print("New-job email sent successfully")
 else:
-
-    send_email(
-        subject="No New Job Matches",
-        body="No matching jobs found today."
-    )
-
-    print(
-        "No jobs found email sent"
-    )
+    print("No new jobs found; no email sent")
