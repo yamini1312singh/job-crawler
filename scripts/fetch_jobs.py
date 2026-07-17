@@ -4,6 +4,7 @@ from pathlib import Path
 
 from job_sources import get_sample_jobs
 from filter_jobs import keep_job
+from check_open import filter_open_jobs
 from send_email import send_email
 
 
@@ -218,14 +219,21 @@ print(f"Filtered to {len(jobs)} unique jobs")
 print(f"Found {len(new_jobs)} jobs not emailed before")
 
 # -------------------------
-# EMAIL ONLY NEW JOBS
+# DROP JOBS THAT ARE ALREADY CLOSED
 # -------------------------
-if new_jobs:
+# Only the new jobs are checked (small set), and the check fails open:
+# anything we cannot confirm as closed is kept.
+open_jobs = filter_open_jobs(new_jobs)
+
+# -------------------------
+# EMAIL ONLY NEW, OPEN JOBS
+# -------------------------
+if open_jobs:
     email_body = (
-        f"Found {len(new_jobs)} new job matches\n\n"
+        f"Found {len(open_jobs)} new job matches\n\n"
     )
 
-    for job in new_jobs:
+    for job in open_jobs:
         email_body += (
             f"{job['company']} | "
             f"{job['role']} | "
@@ -234,10 +242,10 @@ if new_jobs:
         )
 
     send_email(
-        subject=f"{len(new_jobs)} New Job Matches",
+        subject=f"{len(open_jobs)} New Job Matches",
         body=email_body
     )
 
     print("New-job email sent successfully")
 else:
-    print("No new jobs found; no email sent")
+    print("No new open jobs found; no email sent")
