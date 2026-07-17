@@ -16,14 +16,11 @@ HEADERS = {
 }
 
 
-def text_or_unknown(element):
-    if element:
-        text = element.get_text(" ", strip=True)
+def get_text(element, default="Unknown"):
+    if not element:
+        return default
 
-        if text:
-            return text
-
-    return "Unknown"
+    return element.get_text(" ", strip=True) or default
 
 
 def get_naukri_jobs():
@@ -40,11 +37,7 @@ def get_naukri_jobs():
 
     for term in search_terms:
         slug = term.lower().replace(" ", "-")
-
-        url = (
-            f"https://www.naukri.com/"
-            f"{slug}-jobs-in-india"
-        )
+        url = f"https://www.naukri.com/{slug}-jobs-in-india"
 
         try:
             response = requests.get(
@@ -78,38 +71,40 @@ def get_naukri_jobs():
             )
 
             for card in cards:
-                title_element = card.select_one(
-                    "a.title, "
-                    "a.titleEllipsis, "
-                    "a.jobTitle"
+                title = card.select_one(
+                    "a.title, a.titleEllipsis, a.jobTitle"
                 )
 
-                if not title_element:
+                if not title:
                     continue
 
-                company_element = card.select_one(
-                    "a.comp-name, "
-                    "a.compName, "
-                    "a.subTitle"
+                company = card.select_one(
+                    "a.comp-name, a.compName, a.subTitle"
                 )
 
-                location_element = card.select_one(
-                    "span.locWdth, "
-                    "span.location, "
-                    "li.location"
+                location = card.select_one(
+                    "span.locWdth, span.location, li.location"
                 )
 
-                link = title_element.get("href", "").strip()
+                link = title.get("href", "").strip()
 
                 if not link:
                     continue
 
-                jobs.append(
-                    {
-                        "company": text_or_unknown(
-                            company_element
-                        ),
-                        "role": text_or_unknown(
-                            title_element
-                        ),
-                        "location": text
+                jobs.append({
+                    "company": get_text(company),
+                    "role": get_text(title),
+                    "location": get_text(location),
+                    "link": urljoin(
+                        "https://www.naukri.com",
+                        link
+                    ),
+                    "source": "NAUKRI"
+                })
+
+        except requests.RequestException as error:
+            print(f"Naukri error for {term}: {error}")
+
+    print(f"Naukri jobs extracted: {len(jobs)}")
+
+    return jobs
