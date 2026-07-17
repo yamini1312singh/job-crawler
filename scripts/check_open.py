@@ -119,16 +119,14 @@ def _is_linkedin_open(session, link):
 
     text = response.text.lower()
 
-    # Explicit closed signals.
+    # Explicit closed signals only. (We deliberately do NOT infer
+    # "closed" from a missing apply button: LinkedIn also serves open
+    # jobs with a "sign in to apply" modal that has no apply button,
+    # so that heuristic produced false positives on live jobs.)
     if any(phrase in text for phrase in CLOSED_PHRASES):
         return False
 
     if "closed-job__flavor--closed" in text:
-        return False
-
-    # An open posting always renders the apply CTA. On a fully loaded
-    # page, its absence means the posting is closed.
-    if "apply-button--default" not in text and len(text) > 2000:
         return False
 
     return True
